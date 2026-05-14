@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VAL Lava Jato & Estética Automotiva — Há mais de 13 anos cuidando do seu carro em Franca-SP. Lavagem, cera, polimento. Agende pelo WhatsApp." />
+  <title>VAL Lava Jato & Estética Automotiva</title>
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       VARIÁVEIS E RESET
+    ============================================= */
+    :root {
+      --preto:    #000000;
+      --preto-2:  #0a0a0a;
+      --dourado:  #F5C518;
+      --dourado-escuro: #c9a010;
+      --branco:   #FFFFFF;
+      --whatsapp: #25D366;
+      --radius:   16px;
+      --radius-sm: 10px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--preto);
+      color: var(--branco);
+      font-family: 'Montserrat', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* =============================================
+       UTILITÁRIOS
+    ============================================= */
+    .section-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dourado);
+      margin-bottom: 10px;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 40px 100px;
+      background: #0a0a0a;
+      overflow: hidden;
+    }
+
+    /* Fundo carbon fiber sutil — igual ao cartão */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 6px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 6px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Borda esquerda dourada com gradiente — igual à lateral do cartão */
+    #hero::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: linear-gradient(to bottom, transparent 0%, var(--dourado) 20%, var(--dourado) 80%, transparent 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Borda direita dourada */
+    .hero-border-right {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: linear-gradient(to bottom, transparent 0%, var(--dourado) 20%, var(--dourado) 80%, transparent 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Canto superior esquerdo — faixa diagonal dourada exata do cartão */
+    .hero-corner-tl,
+    .hero-corner-tr,
+    .hero-corner-bl,
+    .hero-corner-br {
+      position: absolute;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .hero-corner-tl { top: 0; left: 0; }
+    .hero-corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+    .hero-corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+    .hero-corner-br { bottom: 0; right: 0; transform: scale(-1,-1); }
+
+    /* Garante que conteúdo fique acima dos decorativos */
+    #hero > *:not(#hero::before):not(#hero::after):not(.hero-border-right):not(.hero-corner-tl):not(.hero-corner-tr):not(.hero-corner-bl):not(.hero-corner-br) {
+      position: relative;
+      z-index: 4;
+    }
+
+    .hero-logo {
+      width: min(300px, 78vw);
+      height: auto;
+      max-height: 220px;
+      object-fit: contain;
+      margin: 0 auto 24px;
+      display: block;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.5rem, 6.5vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--branco);
+      margin-bottom: 32px;
+      animation: fadeDown 0.7s 0.2s ease both;
+    }
+
+    .hero-tagline span {
+      color: var(--dourado);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--branco);
+      letter-spacing: 0.02em;
+      margin-top: -8px;
+      margin-bottom: 32px;
+      animation: fadeDown 0.7s 0.15s ease both;
+      opacity: 0.8;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--dourado);
+      color: var(--preto);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 32px rgba(245,197,24,0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      animation: fadeDown 0.7s 0.3s ease both;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 12px rgba(245,197,24,0.25);
+    }
+
+    /* =============================================
+       SERVIÇOS
+    ============================================= */
+    #servicos {
+      padding: 64px 20px 56px;
+      background: var(--preto-2);
+    }
+
+    #servicos .section-header {
+      text-align: center;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #servicos h2 {
+      font-size: clamp(1.4rem, 5vw, 1.9rem);
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .servicos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .servico-card {
+      flex: 0 0 calc(33.333% - 10px);
+      max-width: 140px;
+      min-width: 90px;
+      background: var(--preto);
+      border: 1px solid rgba(245,197,24,0.15);
+      border-radius: var(--radius);
+      padding: 20px 10px 16px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .servico-card:active {
+      transform: scale(0.97);
+      border-color: var(--dourado);
+    }
+
+    .servico-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .servico-nome {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--branco);
+      line-height: 1.3;
+    }
+
+    /* =============================================
+       DIFERENCIAIS
+    ============================================= */
+    #diferenciais {
+      padding: 60px 20px 56px;
+      background: var(--preto);
+    }
+
+    #diferenciais .section-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    #diferenciais h2 {
+      font-size: clamp(1.4rem, 5vw, 1.9rem);
+      font-weight: 900;
+    }
+
+    .diferenciais-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .diferencial-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--preto-2);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--dourado);
+      padding: 20px 18px;
+    }
+
+    .diferencial-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .diferencial-texto {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--branco);
+      line-height: 1.35;
+    }
+
+    .diferencial-texto em {
+      font-style: normal;
+      color: var(--dourado);
+    }
+
+    /* =============================================
+       ENDEREÇO
+    ============================================= */
+    #endereco {
+      padding: 60px 20px 56px;
+      background: var(--preto-2);
+      text-align: center;
+    }
+
+    #endereco .section-header {
+      margin-bottom: 28px;
+    }
+
+    #endereco h2 {
+      font-size: clamp(1.4rem, 5vw, 1.9rem);
+      font-weight: 900;
+    }
+
+    .mapa-box {
+      background: var(--preto);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+
+    .mapa-box .pin-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .endereco-texto {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+
+    .endereco-texto strong {
+      display: block;
+      color: var(--dourado);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      background: transparent;
+      color: var(--dourado);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: 50px;
+      border: 2px solid var(--dourado);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-maps:active {
+      background: var(--dourado);
+      color: var(--preto);
+    }
+
+    /* =============================================
+       CTA FINAL
+    ============================================= */
+    #cta-final {
+      padding: 64px 24px 80px;
+      background: var(--dourado);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cta-final::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: rgba(0,0,0,0.07);
+      border-radius: 50%;
+      top: -80px; right: -80px;
+      pointer-events: none;
+    }
+
+    .cta-titulo {
+      font-size: clamp(1.5rem, 6vw, 2.1rem);
+      font-weight: 900;
+      color: var(--preto);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.6);
+      margin-bottom: 32px;
+    }
+
+    .btn-whatsapp-final {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--preto);
+      color: var(--branco);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 18px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+      transition: transform 0.15s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-whatsapp-final:active {
+      transform: scale(0.97);
+    }
+
+    /* =============================================
+       BOTÃO FLUTUANTE WHATSAPP
+    ============================================= */
+    #float-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--whatsapp);
+      color: var(--branco);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 13px 18px 13px 14px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      /* Garante que não ultrapasse a tela */
+      max-width: calc(100vw - 40px);
+    }
+
+    #float-wa:active {
+      transform: scale(0.96);
+      box-shadow: 0 2px 10px rgba(37,211,102,0.3);
+    }
+
+    /* =============================================
+       ANIMAÇÕES
+    ============================================= */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       RODAPÉ MÍNIMO
+    ============================================= */
+    footer {
+      background: var(--preto);
+      padding: 24px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    footer p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       MEDIA QUERY — telas maiores (tablet/desktop)
+    ============================================= */
+    @media (min-width: 480px) {
+      .servico-card {
+        flex: 0 0 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       SEÇÃO: HERO
+  ============================================= -->
+  <section id="hero">
+
+    <!-- Borda direita dourada -->
+    <div class="hero-border-right"></div>
+
+    <!-- Canto superior esquerdo — faixa dourada diagonal exata do cartão -->
+    <div class="hero-corner-tl">
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Faixa larga que vai da borda esquerda até o topo, cortada em diagonal -->
+        <polygon points="0,0 120,0 60,60 0,60" fill="#F5C518" opacity="0.95"/>
+        <!-- Linha fina de acabamento na diagonal -->
+        <line x1="120" y1="0" x2="0" y2="60" stroke="#c9a010" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="hero-corner-tr">
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,0 120,0 60,60 0,60" fill="#F5C518" opacity="0.95"/>
+        <line x1="120" y1="0" x2="0" y2="60" stroke="#c9a010" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="hero-corner-bl">
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,0 120,0 60,60 0,60" fill="#F5C518" opacity="0.95"/>
+        <line x1="120" y1="0" x2="0" y2="60" stroke="#c9a010" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="hero-corner-br">
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,0 120,0 60,60 0,60" fill="#F5C518" opacity="0.95"/>
+        <line x1="120" y1="0" x2="0" y2="60" stroke="#c9a010" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Logo -->
+    <img src="val-logo.png" alt="VAL Lava Jato" class="hero-logo" />
+
+    <!-- Frase que aparecia logo abaixo da logo no design original -->
+    <p class="hero-sub">Há mais de 13 anos cuidando do seu carro.</p>
+
+    <!-- Tagline principal -->
+    <h1 class="hero-tagline">
+      Seu carro merece<br><span>o melhor cuidado.</span>
+    </h1>
+
+    <!-- CTA principal -->
+    <a
+      href="https://wa.me/5516991396325?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+agendar+uma+lavagem"
+      class="btn-primary"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Agendar pelo WhatsApp"
+    >
+      <!-- Ícone WhatsApp inline -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#0d0d0d" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Agendar pelo WhatsApp
+    </a>
+  </section>
+
+  <!-- =============================================
+       SEÇÃO: SERVIÇOS
+  ============================================= -->
+  <section id="servicos">
+    <div class="section-header">
+      <span class="section-label">O que fazemos</span>
+      <h2>Nossos <span style="color:var(--dourado)">serviços</span></h2>
+    </div>
+
+    <div class="servicos-grid">
+
+      <div class="servico-card">
+        <span class="servico-icon">🚿</span>
+        <span class="servico-nome">Lavagem Simples</span>
+      </div>
+
+      <div class="servico-card">
+        <span class="servico-icon">✨</span>
+        <span class="servico-nome">Lavagem Completa</span>
+      </div>
+
+      <div class="servico-card">
+        <span class="servico-icon">⚙️</span>
+        <span class="servico-nome">Lavagem de Motor</span>
+      </div>
+
+      <div class="servico-card">
+        <span class="servico-icon">🪄</span>
+        <span class="servico-nome">Cera</span>
+      </div>
+
+      <div class="servico-card">
+        <span class="servico-icon">💎</span>
+        <span class="servico-nome">Polimento</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =============================================
+       SEÇÃO: DIFERENCIAIS
+  ============================================= -->
+  <section id="diferenciais">
+    <div class="section-header">
+      <span class="section-label">Por que escolher a VAL?</span>
+      <h2>Nossos <span style="color:var(--dourado)">diferenciais</span></h2>
+    </div>
+
+    <div class="diferenciais-list">
+
+      <div class="diferencial-item">
+        <span class="diferencial-icon">🏆</span>
+        <p class="diferencial-texto">
+          <em>Mais de 13 anos</em> de experiência cuidando do seu carro com seriedade.
+        </p>
+      </div>
+
+      <div class="diferencial-item">
+        <span class="diferencial-icon">💧</span>
+        <p class="diferencial-texto">
+          Lavagem com <em>água quente ou fria</em> — você escolhe o que é melhor pro seu carro.
+        </p>
+      </div>
+
+      <div class="diferencial-item">
+        <span class="diferencial-icon">⚡</span>
+        <p class="diferencial-texto">
+          <em>Atendimento rápido e de confiança.</em> Sem enrolação, só resultado.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =============================================
+       SEÇÃO: ENDEREÇO
+  ============================================= -->
+  <section id="endereco">
+    <div class="section-header">
+      <span class="section-label">Onde estamos</span>
+      <h2>Fácil de <span style="color:var(--dourado)">encontrar</span></h2>
+    </div>
+
+    <div class="mapa-box">
+      <span class="pin-icon">📍</span>
+      <p class="endereco-texto">
+        <strong>VAL Lava Jato</strong>
+        Av. Hugo Bettarelo, 3740<br />
+        Jardim Piratininga — Franca, SP
+      </p>
+      <a
+        href="https://www.google.com/maps/search/Av.+Hugo+Bettarelo,+3740,+Jardim+Piratininga,+Franca,+SP"
+        class="btn-maps"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Ver endereço no Google Maps"
+      >
+        <!-- Ícone Maps -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        Ver no Maps
+      </a>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SEÇÃO: CTA FINAL
+  ============================================= -->
+  <section id="cta-final">
+    <p class="section-label" style="color:rgba(0,0,0,0.45)">Bora agendar?</p>
+    <h2 class="cta-titulo">Manda uma mensagem<br>e a gente resolve<br>na hora.</h2>
+    <p class="cta-sub">Atendemos pelo WhatsApp. Rápido e sem complicação.</p>
+
+    <a
+      href="https://wa.me/5516991396325?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+agendar+uma+lavagem"
+      class="btn-whatsapp-final"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar com a VAL pelo WhatsApp"
+    >
+      <!-- Ícone WhatsApp inline -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Chamar no WhatsApp
+    </a>
+  </section>
+
+  <!-- =============================================
+       RODAPÉ MÍNIMO
+  ============================================= -->
+  <footer>
+    <p>VAL Lava Jato &amp; Estética Automotiva<br />Valdecir · (16) 9.9139-6325 · Franca, SP</p>
+  </footer>
+
+  <!-- =============================================
+       BOTÃO FLUTUANTE WHATSAPP
+  ============================================= -->
+  <a
+    id="float-wa"
+    href="https://wa.me/5516991396325?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+agendar+uma+lavagem"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Falar agora pelo WhatsApp"
+  >
+    <!-- Ícone WhatsApp SVG inline verde -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Falar agora
+  </a>
+
+  <!-- =============================================
+       JS MÍNIMO: animação de entrada ao rolar
+  ============================================= -->
+  <script>
+    // Animação leve de "fade-in" para cards ao entrar na viewport
+    (function () {
+      var targets = document.querySelectorAll('.servico-card, .diferencial-item, .mapa-box');
+
+      if (!('IntersectionObserver' in window)) return;
+
+      targets.forEach(function (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+      });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
